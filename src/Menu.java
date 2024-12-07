@@ -1,41 +1,50 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 public class Menu extends JPanel {
 
     final int WIDTH = 850;
     final int HEIGHT = 475;
 
-    JButton play = new RoundedButton("PLAY");
-    JButton leaderboard = new RoundedButton("LEADERBOARD");
-    JButton about = new RoundedButton("ABOUT");
-    JButton exit = new RoundedButton("EXIT");
+    JButton play = new RoundedButton("PLAY", Color.decode("#00BFFF")); // Biru
+    JButton leaderboard = new RoundedButton("LEADERBOARD", Color.decode("#32CD32")); // Hijau
+    JButton exit = new RoundedButton("EXIT", Color.decode("#FF6347")); // Merah
     JPanel buttonContainer = new JPanel();
 
     JLabel judulLabel = new JLabel("ROCK PAPER SCISSOR");
     JPanel judulContainer = new JPanel() {
-        // Override paintComponent untuk border melengkung
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); 
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setColor(getBackground());
-            g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30); // Menggambar border melengkung dengan radius 30
+            g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
         }
     };
 
-    Menu() {
+    Image backgroundImage;
+
+    Menu(String imagePath) {
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        this.setBackground(Color.decode("#d5edff"));
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+
+        try {
+            backgroundImage = ImageIO
+                    .read(new File("D:\\SEMESTER 5\\PBO\\Project\\ProjekPBO - Copy\\src\\asset\\Baground.jpg"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
                 removeAll();
+                add(new GamePanel());
                 revalidate();
                 repaint();
             }
@@ -52,18 +61,8 @@ public class Menu extends JPanel {
                         evt.printStackTrace();
                     }
                     Leaderboard leaderboardFrame = new Leaderboard();
-					leaderboardFrame.setVisible(true);
+                    leaderboardFrame.setVisible(true);
                 });
-                revalidate();
-                repaint();
-            }
-        });
-
-        about.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-                removeAll();
                 revalidate();
                 repaint();
             }
@@ -76,54 +75,55 @@ public class Menu extends JPanel {
             }
         });
 
-        // Menggunakan GridBagLayout agar tombol berada di tengah
         buttonContainer.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;   // kolom 0 (tengah)
-        gbc.gridy = GridBagConstraints.RELATIVE;  // Urutkan vertikal
-        gbc.insets = new Insets(10, 0, 10, 0);   // Jarak antar tombol
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.insets = new Insets(10, 0, 10, 0);
         buttonContainer.add(play, gbc);
         buttonContainer.add(leaderboard, gbc);
-        buttonContainer.add(about, gbc);
         buttonContainer.add(exit, gbc);
 
-        buttonContainer.setBackground(Color.decode("#6d6d8f"));
+        buttonContainer.setBackground(Color.decode("#FFFFFF"));
         buttonContainer.setPreferredSize(new Dimension(500, 350));
 
-        // Mengatur judulContainer agar menggunakan FlowLayout.CENTER
-        judulContainer.setLayout(new FlowLayout(FlowLayout.CENTER)); // Menambahkan FlowLayout.CENTER
+        judulContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         judulContainer.setPreferredSize(new Dimension(500, 100));
-        judulContainer.setBackground(Color.decode("#0b0b45"));
-        judulContainer.setOpaque(true); // Tetap menggunakan opaque true agar background terlihat
+        judulContainer.setBackground(Color.decode("#27cf9f"));
+        judulContainer.setOpaque(true);
+        judulContainer.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
 
-        // Menggunakan EmptyBorder untuk memberikan margin atas
-        judulContainer.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0)); // Menambahkan margin atas
-
-        // Mengubah font judulLabel agar lebih estetis dan mencerminkan sebuah game
-        judulLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+        judulLabel.setFont(new Font("Monospaced", Font.BOLD, 30));
         judulLabel.setForeground(Color.WHITE);
         judulLabel.setOpaque(false);
 
-        judulContainer.add(judulLabel); // Menambahkan label ke dalam container
+        judulContainer.add(judulLabel);
         this.add(judulContainer);
         this.add(buttonContainer);
     }
 
-    // RoundedButton class tetap sama seperti sebelumnya
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, this);
+        }
+    }
+
     public class RoundedButton extends JButton {
         private int radius;
+        private Color buttonColor;
 
-        // Konstruktor untuk RoundedButton
-        public RoundedButton(String text) {
+        public RoundedButton(String text, Color color) {
             super(text);
-            this.radius = 30; // radius lebih besar untuk sudut yang lebih melengkung
-            setContentAreaFilled(false); // Menghindari area konten yang tidak berbentuk bulat
-            setBackground(Color.decode("#000080")); //  warna tombol menjadi biru navy
-            setForeground(Color.WHITE); //  warna teks menjadi putih
-            setFont(new Font("Comic Sans MS", Font.BOLD, 20)); //  font agar lebih estetis dan mencerminkan game
+            this.radius = 30;
+            this.buttonColor = color; // Set warna tombol
+            setContentAreaFilled(false);
+            setBackground(buttonColor);
+            setForeground(Color.WHITE);
+            setFont(new Font("Monospaced", Font.BOLD, 20));
         }
 
-        // tombol dengan sudut melengkung
         @Override
         protected void paintComponent(Graphics g) {
             if (getModel().isPressed()) {
@@ -134,35 +134,22 @@ public class Menu extends JPanel {
                 g.setColor(getBackground());
             }
 
-            g.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius); // Menimpa area tombol dengan sudut melengkung
-            super.paintComponent(g); // Memastikan teks tetap digambar
+            g.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
+            super.paintComponent(g);
         }
 
-        // Mengatur border tombol
         @Override
         protected void paintBorder(Graphics g) {
             g.setColor(getForeground());
-            g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, radius, radius); // Menambah border bulat
+            g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, radius, radius);
         }
 
-        // Mengubah ukuran tombol
         @Override
         public Dimension getPreferredSize() {
             Dimension size = super.getPreferredSize();
             size.width = 200;
-            size.height = 60; // Mengubah tinggi tombol agar lebih besar
+            size.height = 60;
             return size;
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Rock Paper Scissor Game");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setContentPane(new Menu());
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
     }
 }
