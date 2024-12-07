@@ -1,5 +1,3 @@
-package batuguntingkertas;
-
 public class User extends Entity implements Behaviour{
 	
 	User(String name, int health, int attack, int energy, int defence) {

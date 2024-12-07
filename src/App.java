@@ -7,7 +7,7 @@ public class App extends JFrame {
     final int WIDTH = 850;
     final int HEIGHT = 500;
     Menu menu = new Menu();
-
+ 
     App() {
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         this.add(menu);
@@ -23,7 +23,6 @@ public class App extends JFrame {
         try {
             new App();
         } catch (Exception e) {
-            // TODO: handle exception
         }
     }
 
