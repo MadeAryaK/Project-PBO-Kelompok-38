@@ -51,6 +51,8 @@ public class Menu extends JPanel {
                             | UnsupportedLookAndFeelException evt) {
                         evt.printStackTrace();
                     }
+                    Leaderboard leaderboardFrame = new Leaderboard();
+					leaderboardFrame.setVisible(true);
                 });
                 revalidate();
                 repaint();
