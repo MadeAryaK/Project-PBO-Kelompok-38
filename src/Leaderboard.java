@@ -17,11 +17,11 @@ public class Leaderboard extends JFrame {
 
         panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        panel.setBackground(Color.decode("#d5edff"));
+        panel.setBackground(Color.decode("#CFF5CF"));
 
         JLabel leaderboard = new JLabel("LEADERBOARD");
-        leaderboard.setFont(new Font("Nirmala UI", Font.BOLD, 35));
-        leaderboard.setForeground(Color.decode("#3e16eb"));
+        leaderboard.setFont(new Font("Monospaced", Font.BOLD, 35));
+        leaderboard.setForeground(Color.decode("#32CD32"));
         leaderboard.setHorizontalAlignment(SwingConstants.CENTER);
         leaderboard.setPreferredSize(new Dimension(350, 90));
 
@@ -47,9 +47,9 @@ public class Leaderboard extends JFrame {
                 namaLabel.setPreferredSize(new Dimension(160, 30));
                 scoreLabel.setPreferredSize(new Dimension(120, 30));
 
-                nomor.setFont(new Font("Nirmala UI", Font.BOLD, 15));
-                namaLabel.setFont(new Font("Nirmala UI", Font.BOLD, 15));
-                scoreLabel.setFont(new Font("Nirmala UI", Font.BOLD, 15));
+                nomor.setFont(new Font("Monospaced", Font.BOLD, 15));
+                namaLabel.setFont(new Font("Monospaced", Font.BOLD, 15));
+                scoreLabel.setFont(new Font("Monospaced", Font.BOLD, 15));
 
                 nomor.setForeground(Color.WHITE);
                 namaLabel.setForeground(Color.WHITE);
