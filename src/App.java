@@ -6,7 +6,7 @@ public class App extends JFrame {
     private static final long serialVersionUID = 1L;
     final int WIDTH = 850;
     final int HEIGHT = 500;
-    Menu menu = new Menu();
+    Menu menu = new Menu("src\\asset\\Background.jpeg");
  
     App() {
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));

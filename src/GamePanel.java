@@ -8,7 +8,6 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicProgressBarUI;
-import API.Database;
 
 public class GamePanel extends JPanel {
 

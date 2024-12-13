@@ -34,7 +34,7 @@ public class Menu extends JPanel {
 
         try {
             backgroundImage = ImageIO
-                    .read(new File("D:\\SEMESTER 5\\PBO\\Project\\ProjekPBO - Copy\\src\\asset\\Baground.jpg"));
+                    .read(new File("src\\\\asset\\\\Background.jpeg"));
         } catch (Exception e) {
             e.printStackTrace();
         }
