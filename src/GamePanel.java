@@ -36,9 +36,9 @@ public class GamePanel extends JPanel {
 	JToggleButton skill1Button = new JToggleButton();
 	JToggleButton skill2Button = new JToggleButton();
 
-Image kertas = new ImageIcon("src/asset/KERTASCAT.jpeg").getImage();
-Image batu = new ImageIcon("src/asset/BATUCAT.jpeg").getImage();
-Image gunting = new ImageIcon("src/asset/GUNTINGCAT.jpeg").getImage();
+Image kertas = new ImageIcon("src/asset/kertas.png").getImage();
+Image batu = new ImageIcon("src/asset/batu.png").getImage();
+Image gunting = new ImageIcon("src/asset/gunting.png").getImage();
 Image mati = new ImageIcon("src/asset/mati.png").getImage();
 
 	PlayerArea playerArea = new PlayerArea();
