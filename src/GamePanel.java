@@ -36,12 +36,10 @@ public class GamePanel extends JPanel {
 	JToggleButton skill1Button = new JToggleButton();
 	JToggleButton skill2Button = new JToggleButton();
 
-	Image kertas = new ImageIcon("D:\\SEMESTER 5\\PBO\\Project\\ProjekPBO - Copy\\src\\asset\\KERTASCAT.jpeg")
-			.getImage();
-	Image batu = new ImageIcon("D:\\SEMESTER 5\\PBO\\Project\\ProjekPBO - Copy\\src\\asset\\BATUCAT.jpeg").getImage();
-	Image gunting = new ImageIcon("D:\\SEMESTER 5\\PBO\\Project\\ProjekPBO - Copy\\src\\asset\\GUNTINGCAT.jpeg")
-			.getImage();
-	Image mati = new ImageIcon("D:\\SEMESTER 5\\PBO\\Project\\ProjekPBO\\src\\asset\\mati.png").getImage();
+Image kertas = new ImageIcon("src/asset/KERTASCAT.jpeg").getImage();
+Image batu = new ImageIcon("src/asset/BATUCAT.jpeg").getImage();
+Image gunting = new ImageIcon("src/asset/GUNTINGCAT.jpeg").getImage();
+Image mati = new ImageIcon("src/asset/mati.png").getImage();
 
 	PlayerArea playerArea = new PlayerArea();
 	BotArea botArea = new BotArea();
@@ -58,13 +56,12 @@ public class GamePanel extends JPanel {
 	GamePanel() {
 
 		try {
-			// Muat gambar latar belakang dari path yang sudah Anda tentukan
-			backgroundImage = new ImageIcon(
-					"D:\\SEMESTER 5\\PBO\\Project\\ProjekPBO - Copy\\src\\asset\\Baground.jpg")
-					.getImage(); // Ganti dengan path gambar Anda
+			// Muat gambar latar belakang dari path relatif
+			backgroundImage = new ImageIcon("src/asset/Background.jpg").getImage(); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
